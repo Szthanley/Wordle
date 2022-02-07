@@ -1,0 +1,6 @@
+{
+	"C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, UseTab: Always, IndentWidth: 4, TabWidth: 4 }",
+	"files.associations": {
+		"iostream": "cpp"
+	}
+}
