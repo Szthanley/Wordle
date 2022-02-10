@@ -13,15 +13,16 @@ typedef enum { CORRECT, ELSEWHERE, WRONG, UNDECIDED } Feedback;
 
 class Wordle {
    public:
+	void playGame();
+	Wordle();
+
+   private:
 	int numberOfUserGuesses = 0;
 	std::string correctAnswer;
 	std::array<std::string, NUMBER_OF_POSSIBLE_ANSWERS> possibleAnswers;
 	std::array<std::string, NUMBER_OF_ALLOWED_GUESSES> allowedGuesses;
 
 	std::array<Feedback, WORD_LENGTH> getFeedback(std::string guess);
-	void playGame();
-
-	Wordle();
 };
 
 #endif
