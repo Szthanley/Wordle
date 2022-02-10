@@ -5,6 +5,7 @@
 #include <string>
 
 #define WORD_LENGTH 5
+#define MAXIMUM_GUESSES 6
 #define NUMBER_OF_POSSIBLE_ANSWERS 2315
 #define NUMBER_OF_ALLOWED_GUESSES NUMBER_OF_POSSIBLE_ANSWERS + 10657
 
@@ -18,6 +19,7 @@ class Wordle {
 	std::array<std::string, NUMBER_OF_ALLOWED_GUESSES> allowedGuesses;
 
 	std::array<Feedback, WORD_LENGTH> getFeedback(std::string guess);
+	void playGame();
 
 	Wordle();
 };
