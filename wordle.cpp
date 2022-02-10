@@ -123,10 +123,17 @@ void Wordle::playGame() {
 			std::cout
 				<< "Congratulations, you got the right answer! It took you "
 				<< numberOfUserGuesses << " guesses.";
+			return;
 		}
 
 		std::cout << "\n";
 	}
+
+	/* If the code gets to this point, the user did not guess the correct word
+	in few enough guesses */
+	std::cout << "Unfortunately, you did not guess the word in "
+			  << MAXIMUM_GUESSES << " guesses. The correct word was "
+			  << correctAnswer << ".";
 }
 
 Wordle::Wordle() {
@@ -146,8 +153,8 @@ Wordle::Wordle() {
 		std::string possibleAnswer;
 		std::getline(answersFile, possibleAnswer);
 
-		// Storing the word to both arrays (since a possible answer is also
-		// an allowed guess)
+		/* Storing the word to both arrays (since a possible answer is also an
+		allowed guess) */
 		possibleAnswers[i] = possibleAnswer;
 		allowedGuesses[i] = possibleAnswer;
 	}
@@ -155,12 +162,10 @@ Wordle::Wordle() {
 	// Closing the answers file
 	answersFile.close();
 
-	// Looping through the allowed guesses (not including the possible
-	// answers)
+	// Looping through the allowed guesses (not including the possible answers)
 	for (int i = NUMBER_OF_POSSIBLE_ANSWERS; i < NUMBER_OF_ALLOWED_GUESSES;
 		 i++) {
-		// Reading a line from the guesses file into the allowed guesses
-		// array
+		// Reading a line from the guesses file into the allowed guesses array
 		std::getline(guessesFile, allowedGuesses[i]);
 	}
 
