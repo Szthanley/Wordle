@@ -132,7 +132,7 @@ void Wordle::playGame() {
 Wordle::Wordle() {
 	// Opening the text files
 	std::ifstream answersFile("wordle_answers.txt");
-	std::ifstream guessesFile("wordle_answers.txt");
+	std::ifstream guessesFile("wordle_guesses.txt");
 
 	// Checking if the files were opened without any errors
 	if (!answersFile || !guessesFile) {
