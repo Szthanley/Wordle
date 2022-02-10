@@ -6,8 +6,6 @@
 using namespace std;
 
 int main() {
-	// some code to test if the feedback function works
-
 	Wordle wordleGame;
 
 	wordleGame.playGame();

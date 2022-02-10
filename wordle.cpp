@@ -167,8 +167,6 @@ Wordle::Wordle() {
 	// Closing the guesses file
 	guessesFile.close();
 
-	// Choosing a random word from the possible answers to be the correct
-	// answer correctAnswer = possibleAnswers[rand() %
-	// NUMBER_OF_POSSIBLE_ANSWERS];
-	correctAnswer = "frame";  // this is just for testing purposes
+	// Choosing a random word from the possible answers to be the correct answer
+	correctAnswer = possibleAnswers[rand() % NUMBER_OF_POSSIBLE_ANSWERS];
 }
