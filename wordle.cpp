@@ -6,7 +6,9 @@
 #include <iostream>
 #include <string>
 
+// Function that provides feedback for each letter of a guess
 std::array<Feedback, WORD_LENGTH> Wordle::getFeedback(std::string guess) {
+	// Array to store the feedback for each letter
 	std::array<Feedback, WORD_LENGTH> feedback;
 
 	// Looping through each letter of the guess and the correct answer
