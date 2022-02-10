@@ -68,17 +68,17 @@ std::array<Feedback, WORD_LENGTH> Wordle::getFeedback(std::string guess) {
 
 void Wordle::playGame() {
 	while (numberOfUserGuesses < MAXIMUM_GUESSES) {
-		std::cout << "Guess a word: ";
-
 		std::string userGuess;
 		// Looping until a valid guess is given
 		while (true) {
+			std::cout << "Guess a word: ";
+
 			std::cin >> userGuess;
 
 			// Making sure that the guess is the correct length
 			if (userGuess.size() != WORD_LENGTH) {
-				std::cout << "Please enter a word that is " << WORD_LENGTH
-						  << " letters long.";
+				std::cout << "Please enter a word that is exactly "
+						  << WORD_LENGTH << " letters long. ";
 				continue;
 			}
 
@@ -87,7 +87,7 @@ void Wordle::playGame() {
 			 * found) */
 			if (std::find(allowedGuesses.begin(), allowedGuesses.end(),
 						  userGuess) == allowedGuesses.end()) {
-				std::cout << "That is not a valid word.";
+				std::cout << "That is not a valid word. ";
 				continue;
 			}
 
