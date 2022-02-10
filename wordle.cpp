@@ -118,6 +118,8 @@ void Wordle::playGame() {
 			std::cout << " ] ";
 		}
 
+		std::cout << "\n";
+
 		// Checking if the guess was correct
 		if (userGuess == correctAnswer) {
 			std::cout
@@ -125,8 +127,6 @@ void Wordle::playGame() {
 				<< numberOfUserGuesses << " guesses.";
 			return;
 		}
-
-		std::cout << "\n";
 	}
 
 	/* If the code gets to this point, the user did not guess the correct word
