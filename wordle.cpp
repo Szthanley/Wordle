@@ -1,9 +1,9 @@
 #include "wordle.h"
 
 #include <algorithm>
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <random>
 #include <string>
 
 // Function that provides feedback for each letter of a guess
@@ -172,6 +172,13 @@ Wordle::Wordle() {
 	// Closing the guesses file
 	guessesFile.close();
 
-	// Choosing a random word from the possible answers to be the correct answer
-	correctAnswer = possibleAnswers[rand() % NUMBER_OF_POSSIBLE_ANSWERS];
+	// Device that seeds the random number generator
+	std::random_device rd;
+	// The actual random number generator
+	std::mt19937 gen(rd());
+	// Distribution that chooses a random index of the possible answers array
+	std::uniform_int_distribution<std::mt19937::result_type> dist(
+		0, NUMBER_OF_POSSIBLE_ANSWERS - 1);
+	// Chooses the word at the randomly-generated index to be the correct answer
+	correctAnswer = possibleAnswers[dist(gen)];
 }
