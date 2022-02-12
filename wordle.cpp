@@ -108,7 +108,7 @@ void Wordle::playGame() {
 			// Beginning the ANSI escape code for the text colour
 			std::cout << "\x1b[";
 
-			// Using a switch statement to choose a coloru based on the feedback
+			// Using a switch statement to choose a colour based on the feedback
 			switch (feedback[i]) {
 				case CORRECT:
 					// 32 is green
