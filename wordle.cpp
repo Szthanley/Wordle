@@ -1,10 +1,12 @@
 #include "wordle.h"
 
 #include <algorithm>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <random>
 #include <string>
+#include <thread>
 
 // Function that provides feedback for each letter of a guess
 std::array<Feedback, WORD_LENGTH> Wordle::getFeedback(std::string guess) {
@@ -126,6 +128,10 @@ void Wordle::playGame() {
 
 			// Ending the escape sequence and reprinting the letter of the guess
 			std::cout << "m" << userGuess[i];
+
+			// Waits between changing the colour of each letter
+			std::this_thread::sleep_for(
+				std::chrono::milliseconds(FEEDBACK_DELAY));
 		}
 
 		// Resetting the text colour to the default and printing a line break
