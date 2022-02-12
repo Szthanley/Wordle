@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "wordle.h"
+#include "wordle.cpp"
 
 using namespace std;
 

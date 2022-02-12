@@ -73,11 +73,17 @@ void Wordle::playGame() {
 		 numberOfUserGuesses++) {
 		std::string userGuess;
 		// Looping until a valid guess is given
+		bool quit = false; //changed to true if the user types "giveup"
 		while (true) {
 			// \x1b[2K clears the line (in case there is user input there)
 			std::cout << "Guess a word:\n\x1b[2K";
 
 			std::cin >> userGuess;
+			
+			if(userGuess == "giveup"){
+				quit = true;
+				break;
+			}
 
 			// Making sure that the guess is the correct length
 			if (userGuess.size() != WORD_LENGTH) {
@@ -100,6 +106,12 @@ void Wordle::playGame() {
 			// If the code reaches this point, the guess is valid
 			break;
 		}
+
+		if (quit){
+			break;
+		}
+
+
 
 		std::array<Feedback, WORD_LENGTH> feedback = getFeedback(userGuess);
 
