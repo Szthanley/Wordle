@@ -17,7 +17,6 @@ class Wordle {
 	Wordle();
 
    private:
-	int numberOfUserGuesses = 0;
 	std::string correctAnswer;
 	std::array<std::string, NUMBER_OF_POSSIBLE_ANSWERS> possibleAnswers;
 	std::array<std::string, NUMBER_OF_ALLOWED_GUESSES> allowedGuesses;

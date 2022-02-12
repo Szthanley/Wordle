@@ -67,7 +67,8 @@ std::array<Feedback, WORD_LENGTH> Wordle::getFeedback(std::string guess) {
 }
 
 void Wordle::playGame() {
-	while (numberOfUserGuesses < MAXIMUM_GUESSES) {
+	for (int numberOfUserGuesses = 1; numberOfUserGuesses <= MAXIMUM_GUESSES;
+		 numberOfUserGuesses++) {
 		std::string userGuess;
 		// Looping until a valid guess is given
 		while (true) {
@@ -94,8 +95,6 @@ void Wordle::playGame() {
 			// If the code reaches this point, the guess is valid
 			break;
 		}
-
-		numberOfUserGuesses++;
 
 		std::array<Feedback, WORD_LENGTH> feedback = getFeedback(userGuess);
 
