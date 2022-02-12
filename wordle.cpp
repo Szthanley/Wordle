@@ -1,10 +1,12 @@
 #include "wordle.h"
 
 #include <algorithm>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <random>
 #include <string>
+#include <thread>
 
 // Function that provides feedback for each letter of a guess
 std::array<Feedback, WORD_LENGTH> Wordle::getFeedback(std::string guess) {
@@ -72,13 +74,15 @@ void Wordle::playGame() {
 		std::string userGuess;
 		// Looping until a valid guess is given
 		while (true) {
-			std::cout << "Guess a word: ";
+			// \x1b[2K clears the line (in case there is user input there)
+			std::cout << "Guess a word:\n\x1b[2K";
 
 			std::cin >> userGuess;
 
 			// Making sure that the guess is the correct length
 			if (userGuess.size() != WORD_LENGTH) {
-				std::cout << "Please enter a word that is exactly "
+				// \x1b[2A moves the "cursor" 2 lines up
+				std::cout << "\x1b[2APlease enter a word that is exactly "
 						  << WORD_LENGTH << " letters long. ";
 				continue;
 			}
@@ -88,7 +92,8 @@ void Wordle::playGame() {
 			 * found) */
 			if (std::find(allowedGuesses.begin(), allowedGuesses.end(),
 						  userGuess) == allowedGuesses.end()) {
-				std::cout << "That is not a valid word. ";
+				// \x1b[2A moves the "cursor" 2 lines up
+				std::cout << "\x1b[2AThat is not a valid word. ";
 				continue;
 			}
 
@@ -98,26 +103,39 @@ void Wordle::playGame() {
 
 		std::array<Feedback, WORD_LENGTH> feedback = getFeedback(userGuess);
 
-		for (Feedback letterFeedback : feedback) {
-			std::cout << "[ ";
+		// Moving the "cursor" a line up (to the beginning of the user input)
+		std::cout << "\x1b[A";
 
-			// Using a switch statement to convert the feedback into a string
-			switch (letterFeedback) {
+		for (int i = 0; i < WORD_LENGTH; i++) {
+			// Beginning the ANSI escape code for the text colour
+			std::cout << "\x1b[";
+
+			// Using a switch statement to choose a colour based on the feedback
+			switch (feedback[i]) {
 				case CORRECT:
-					std::cout << "CORRECT";
+					// 32 is green
+					std::cout << "32";
 					break;
 				case ELSEWHERE:
-					std::cout << "ELSEWHERE";
+					// 33 is yellow
+					std::cout << "33";
 					break;
 				case WRONG:
-					std::cout << "WRONG";
+					// 31 is red
+					std::cout << "31";
 					break;
 			}
 
-			std::cout << " ] ";
+			// Ending the escape sequence and reprinting the letter of the guess
+			std::cout << "m" << userGuess[i];
+
+			// Waits between changing the colour of each letter
+			std::this_thread::sleep_for(
+				std::chrono::milliseconds(FEEDBACK_DELAY));
 		}
 
-		std::cout << "\n";
+		// Resetting the text colour to the default and printing a line break
+		std::cout << "\x1b[0m\n";
 
 		// Checking if the guess was correct
 		if (userGuess == correctAnswer) {
