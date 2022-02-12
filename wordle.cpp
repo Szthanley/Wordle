@@ -72,13 +72,15 @@ void Wordle::playGame() {
 		std::string userGuess;
 		// Looping until a valid guess is given
 		while (true) {
-			std::cout << "Guess a word:\n";
+			// \x1b[2K clears the line (in case there is user input there)
+			std::cout << "Guess a word:\n\x1b[2K";
 
 			std::cin >> userGuess;
 
 			// Making sure that the guess is the correct length
 			if (userGuess.size() != WORD_LENGTH) {
-				std::cout << "Please enter a word that is exactly "
+				// \x1b[2A moves the "cursor" 2 lines up
+				std::cout << "\x1b[2APlease enter a word that is exactly "
 						  << WORD_LENGTH << " letters long. ";
 				continue;
 			}
@@ -88,7 +90,8 @@ void Wordle::playGame() {
 			 * found) */
 			if (std::find(allowedGuesses.begin(), allowedGuesses.end(),
 						  userGuess) == allowedGuesses.end()) {
-				std::cout << "That is not a valid word. ";
+				// \x1b[2A moves the "cursor" 2 lines up
+				std::cout << "\x1b[2AThat is not a valid word. ";
 				continue;
 			}
 
